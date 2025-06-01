@@ -133,7 +133,7 @@ const main_core = 7;
 const num_grooms = 0x200;
 const num_handles = 0x100;
 const num_sds = 0x100; // max is 0x100 due to max IPV6_TCLASS
-const num_alias = 10;
+const num_alias = 100;
 const num_races = 100;
 const leak_len = 16;
 const num_leaks = 5;
@@ -959,6 +959,10 @@ function make_aliased_pktopts(sds) {
     const tclass = new Word();
     for (let loop = 0; loop < num_alias; loop++) {
         for (let i = 0; i < num_sds; i++) {
+            setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
+        }
+        
+        for (let i = 0; i < num_sds; i++) {
             tclass[0] = i;
             ssockopt(sds[i], IPPROTO_IPV6, IPV6_TCLASS, tclass);
         }
@@ -984,9 +988,6 @@ function make_aliased_pktopts(sds) {
             }
         }
 
-        for (let i = 0; i < num_sds; i++) {
-            setsockopt(sds[i], IPPROTO_IPV6, IPV6_2292PKTOPTIONS, 0, 0);
-        }
     }
     die('failed to make aliased pktopts');
 }
