@@ -3,9 +3,11 @@ export function GoldHEN() {
         res.arrayBuffer().then(arr => {
             window.pld = new Uint32Array(arr);
             setTimeout(() => {
+            sessionStorage.setItem('jbsuccess', 1);
+            document.getElementById('jailbreak').style.display = 'flex';
+            document.getElementById('loader').style.display = 'none';
             window.location.reload();
             }, 3000); // 3 seconds delay
-            sessionStorage.setItem('jbsuccess', 1);
         })
     });   
 }
@@ -15,9 +17,11 @@ export function HEN() {
         res.arrayBuffer().then(arr => {
             window.pld = new Uint32Array(arr);
             setTimeout(() => {
+            sessionStorage.setItem('jbsuccess', 1);
+            document.getElementById('jailbreak').style.display = 'flex';
+            document.getElementById('loader').style.display = 'none';
             window.location.reload();
             }, 3000); // 3 seconds delay
-            sessionStorage.setItem('jbsuccess', 1);
         })
     });   
 }

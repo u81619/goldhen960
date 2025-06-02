@@ -45,7 +45,7 @@ document.getElementById('update-exploit').addEventListener('click', () => {
 });
 
 ckbaj.addEventListener('change', (e) => {
-  alert("WARNING :\nThis option make the jailbreak unstable and this option is not recommended please use the jailbreak button instead !")
+  //alert("WARNING :\nThis option make the jailbreak unstable and this option is not recommended please use the jailbreak button instead !");
   localStorage.setItem('autojbstate', e.target.checked);
   onCheckboxChange(e.target.checked);
 });
@@ -292,6 +292,8 @@ function loadajbsettings(){
     if (sessionStorage.getItem('jbsuccess')) {
       console.log('Aleardy jailbroken !');
     } else {
+      document.getElementById('jailbreak').style.display = 'none';
+      document.getElementById('loader').style.display = 'flex';
       setTimeout(() => {
         jailbreak();
       }, 3000);
@@ -321,6 +323,8 @@ function loadajbsettings(){
 
 async function jailbreak() {
   try {
+    document.getElementById('jailbreak').style.display = 'none';
+    document.getElementById('loader').style.display = 'flex';
     const modules = await loadMultipleModules([
       '../payloads/Jailbreak.js',
       '../psfree/alert.mjs'
