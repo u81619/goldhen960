@@ -86,53 +86,84 @@ function closesettings() {
 }
 
 function CheckFW() {
-  var fwUA = navigator.userAgent.substring(navigator.userAgent.indexOf('5.0 (') + 19, navigator.userAgent.indexOf(') Apple'));
-  var FwUAR = fwUA.replace("layStation 4/","");
-  if (FwUAR == "9.00") {
-    document.getElementById('PS4FW').textContent = `PS4 FW: ${FwUAR} | Compatible`;
-    document.getElementById('PS4FW').style.color = 'green';
-  }else{
-    document.getElementById('PS4FW').textContent = `PS4 FW: ${FwUAR} | Incompatible`;
+  const userAgent = navigator.userAgent;
+  const ps4Regex = /PlayStation 4/;
+  const elementsToHide = [
+    'jailbreak-page', 'jailbreak', 'autojbchkb', 'agtext', 
+    'payloadsbtn', 'generate-cache-btn', 'update-exploit', 'settings-btn'
+  ];
+
+  if (ps4Regex.test(userAgent)) {
+    const firmwareMatch = userAgent.match(/PlayStation 4\/([\d.]+)/);
+    const fwVersion = firmwareMatch ? firmwareMatch[1] : null;
+
+    if (fwVersion === '9.00') {
+      document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Compatible`;
+      document.getElementById('PS4FW').style.color = 'green';
+    } else if (fwVersion === '9.03' || fwVersion === '9.60') {
+      document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | SOON !`;
+      document.getElementById('PS4FW').style.color = 'orange';
+
+      elementsToHide.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+    } else {
+      document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion || 'Unknown'} | Incompatible`;
+      document.getElementById('PS4FW').style.color = 'red';
+
+      elementsToHide.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+    }
+  } else {
+    let platform = 'Unknown platform';
+
+    if (/Android/.test(userAgent)) platform = 'Android';
+    else if (/iPhone|iPad|iPod/.test(userAgent)) platform = 'iOS';
+    else if (/Macintosh/.test(userAgent)) platform = 'MacOS';
+    else if (/Windows/.test(userAgent)) platform = 'Windows';
+    else if (/Linux/.test(userAgent)) platform = 'Linux';
+
+    document.getElementById('PS4FW').textContent = `You're not on a PS4, platform: ${platform}`;
     document.getElementById('PS4FW').style.color = 'red';
-    document.getElementById('jailbreak-page').style.display = 'none';
-    document.getElementById('jailbreak').style.display = 'none';
-    document.getElementById('autogoldhen').style.display = 'none';
-    document.getElementById('agtext').style.display = 'none';
-    document.getElementById('payloadsbtn').style.display = 'none';
-    document.getElementById('generate-cache-btn').style.display = 'none';
-    document.getElementById('update-exploit').style.display = 'none';
-  };
+
+    elementsToHide.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
 }
 
 function checksettings() {
   if (localStorage.getItem('HEN')) {
     menuBtns.forEach(el => {
-      el.onmouseover = () => el.style.backgroundColor = '#00F0FF'; // Corrigé ici
-      el.onmouseout = () => el.style.backgroundColor = ''; // Remise à zéro en sortant
+      el.onmouseover = () => el.style.backgroundColor = '#00F0FF';
+      el.onmouseout = () => el.style.backgroundColor = '';
     });
 
     psBtns.forEach(el => {
       el.onmouseover = () => {
       el.style.boxShadow = '0 0px 48px #00F0FF, 0 0px 10px #000c';
-        // Vérifie si l'élément SVG existe avant d'essayer de changer sa couleur
         const svg = el.querySelector('svg');
         if (svg) svg.style.fill = '#00F0FF';
       };
       el.onmouseout = () => {
         el.style.boxShadow = '';
         const svg = el.querySelector('svg');
-        if (svg) svg.style.fill = ''; // Réinitialise la couleur si nécessaire
+        if (svg) svg.style.fill = '';
       };
     });
 
     plsbtn.forEach(btn => {
       btn.style.borderColor = '#00F0FF';
       btn.addEventListener('mouseenter', () => {
-        btn.style.backgroundColor = '#00F0FF'; // par exemple, changer la couleur de fond au hover
+        btn.style.backgroundColor = '#00F0FF';
       });
 
       btn.addEventListener('mouseleave', () => {
-        btn.style.backgroundColor = ''; // revenir à la couleur d'origine
+        btn.style.backgroundColor = ''; 
       });
     });
 
@@ -146,32 +177,31 @@ function checksettings() {
     });
   } else {
     menuBtns.forEach(el => {
-      el.onmouseover = () => el.style.backgroundColor = '#FFB84D'; // Corrigé ici
-      el.onmouseout = () => el.style.backgroundColor = ''; // Remise à zéro
+      el.onmouseover = () => el.style.backgroundColor = '#FFB84D';
+      el.onmouseout = () => el.style.backgroundColor = '';
     });
 
     psBtns.forEach(el => {
       el.onmouseover = () => {
         el.style.boxShadow = '0 0px 48px #FFB84D, 0 0px 10px #000c';
-        // Vérifie si l'élément SVG existe avant d'essayer de changer sa couleur
         const svg = el.querySelector('svg');
         if (svg) svg.style.fill = '#FFB84D';
       };
       el.onmouseout = () => {
         el.style.boxShadow = '';
         const svg = el.querySelector('svg');
-        if (svg) svg.style.fill = ''; // Réinitialise la couleur si nécessaire
+        if (svg) svg.style.fill = '';
       };
     });
 
     plsbtn.forEach(btn => {
       btn.style.borderColor = '#FFB84D';
       btn.addEventListener('mouseenter', () => {
-        btn.style.backgroundColor = '#FFB84D'; // par exemple, changer la couleur de fond au hover
+        btn.style.backgroundColor = '#FFB84D';
       });
 
       btn.addEventListener('mouseleave', () => {
-        btn.style.backgroundColor = ''; // revenir à la couleur d'origine
+        btn.style.backgroundColor = '';
       });
     });
 
@@ -370,11 +400,11 @@ async function Loadpayloads(payload) {
   }
 }
 
-async function loadsettings() {
-  CheckFW();
+function loadsettings() {
   loadajbsettings();
   loadjbflavor();
   checksettings();
+  CheckFW();
 }
 
 function onCheckboxChange(checked) {
