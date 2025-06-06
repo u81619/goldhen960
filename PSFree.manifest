@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v1
-# Generated on 2025-06-06 17:03:50.990832
+# Generated on 2025-06-06 19:03:39.701688
 
 CACHE:
 index.html
@@ -74,7 +74,6 @@ psfree/lapse/ps4/852.mjs
 psfree/lapse/ps4/900.mjs
 psfree/lapse/ps4/903.mjs
 psfree/lapse/ps4/950.mjs
-psfree/lapse/ps5/.gitinclude
 psfree/module/chain.mjs
 psfree/module/int64.mjs
 psfree/module/mem.mjs
@@ -87,7 +86,6 @@ psfree/rop/ps4/800.mjs
 psfree/rop/ps4/850.mjs
 psfree/rop/ps4/900.mjs
 psfree/rop/ps4/950.mjs
-psfree/rop/ps5/.gitinclude
 
 NETWORK:
 *
