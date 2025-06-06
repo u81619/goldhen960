@@ -72,6 +72,7 @@ const port = "8000";
 const url = `${origin}:${port}`;
 
 const textarea = document.createElement("textarea");
+textarea.style.opacity = 0;
 // JSObject
 const js_textarea = mem.addrof(textarea);
 
