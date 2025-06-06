@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v1
-# Generated on 2025-06-06 19:03:39.701688
+# Generated on 2025-06-06 20:23:36.764961
 
 CACHE:
 index.html
@@ -68,6 +68,7 @@ psfree/kpatch/850.bin
 psfree/kpatch/900.bin
 psfree/kpatch/903.bin
 psfree/kpatch/950.bin
+psfree/kpatch/Makefile
 psfree/lapse/ps4/800.mjs
 psfree/lapse/ps4/850.mjs
 psfree/lapse/ps4/852.mjs

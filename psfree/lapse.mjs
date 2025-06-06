@@ -1864,7 +1864,7 @@ kexploit().then((success) => {
     if (sessionStorage.getItem('binloader')){
       runBinLoader();
     } else {
-        runPayload(window.payload_path);
+      runPayload(window.payload_path);
     }
   }
 });

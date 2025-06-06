@@ -1,4 +1,4 @@
-/* Copyright (C) 2025 anonymous
+/* Copyright (C) 2024 anonymous
 
 This file is part of PSFree.
 
@@ -15,23 +15,17 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
-// 8.00, 8.01, 8.03
+#ifndef TYPES_H_
+#define TYPES_H_
 
-export const pthread_offsets = new Map(
-  Object.entries({
-    pthread_create: 0x25610,
-    pthread_join: 0x27c60,
-    pthread_barrier_init: 0xa0e0,
-    pthread_barrier_wait: 0x1ee00,
-    pthread_barrier_destroy: 0xe180,
-    pthread_exit: 0x19eb0,
-  }),
-);
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long u64;
 
-export const off_kstr = 0x7edcff;
-export const off_cpuid_to_pcpu = 0x228e6b0;
+typedef signed char s8;
+typedef signed short s16;
+typedef signed int s32;
+typedef signed long long s64;
 
-export const off_sysent_661 = 0x11040c0;
-export const jmp_rsi = 0xe629c;
-
-export const patch_elf_loc = "./psfree/kpatch/800.bin"; // Relative to `../../lapse.mjs`
+#endif
