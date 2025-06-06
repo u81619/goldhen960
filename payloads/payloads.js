@@ -51,8 +51,10 @@ function Loadpayloadlocal(PLfile){ //Loading Payload via Payload Param.
                             //alert("Payload sent !");
                         }else{
                             //alert('Payload not sent !');
-                            import('../psfree/alert.mjs');
-                            Loadpayloadonline(PLfile);
+                            setTimeout(() => {
+                                import('../psfree/alert.mjs');
+                                Loadpayloadonline(PLfile);
+                            }, 3000); // 3 seconds delay
                             return;
                         }
                     })
@@ -72,14 +74,13 @@ function Loadpayloadlocal(PLfile){ //Loading Payload via Payload Param.
 // Load Payloads with exploit
 
 function Loadpayloadonline(PLfile) {
-    fetch(PLfile).then(res => {
-        res.arrayBuffer().then(arr => {
-            window.pld = new Uint32Array(arr);
-            setTimeout(() => {
-            window.location.reload();
-            }, 3000); // 3 seconds delay
-        });
-    });   
+    window.payload_path = PLfile;
+    setTimeout(() => {
+        sessionStorage.setItem('jbsuccess', 1);
+        document.getElementById('jailbreak').style.display = 'flex';
+        document.getElementById('loader').style.display = 'none';
+        window.location.reload();
+    }, 3000); // 3 seconds delay
 }
 
 // Payloads

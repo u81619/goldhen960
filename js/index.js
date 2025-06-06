@@ -109,17 +109,9 @@ function CheckFW() {
     const firmwareMatch = userAgent.match(/PlayStation 4\/([\d.]+)/);
     const fwVersion = firmwareMatch ? firmwareMatch[1] : null;
 
-    if (fwVersion === '9.00') {
+    if (fwVersion == '8.00' || fwVersion == '8.01' || fwVersion == '8.01' || fwVersion == '8.03' || fwVersion == '8.50' || fwVersion == '8.52' || fwVersion === '9.00' || fwVersion == '9.03' || fwVersion == '9.04' || fwVersion == '9.50' || fwVersion == '9.51' || fwVersion === '9.60') {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Compatible`;
       document.getElementById('PS4FW').style.color = 'green';
-    } else if (fwVersion === '9.03' || fwVersion === '9.60') {
-      document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | SOON !`;
-      document.getElementById('PS4FW').style.color = 'orange';
-
-      elementsToHide.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
-      });
     } else {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion || 'Unknown'} | Incompatible`;
       document.getElementById('PS4FW').style.color = 'red';
@@ -129,6 +121,8 @@ function CheckFW() {
         if (el) el.style.display = 'none';
       });
     }
+
+    document.title = "PSFree | " + fwVersion
   } else {
     let platform = 'Unknown platform';
 
@@ -384,7 +378,6 @@ async function binloader() {
   try {
     sessionStorage.setItem('binloader', 1);
     const modules = await loadMultipleModules([
-      '../payloads/Jailbreak.js',
       '../psfree/alert.mjs'
     ]);
     console.log("All modules are loaded!");
