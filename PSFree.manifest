@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # v1
-# Generated on 2025-06-06 21:07:19.482407
+# Generated on 2025-06-07 13:15:37.458658
 
 CACHE:
 index.html
@@ -63,12 +63,16 @@ psfree/psfree.mjs
 psfree/send.mjs
 psfree/fonts/FONTS.LICENSE
 psfree/fonts/LiberationMono-Regular.ttf
+psfree/kpatch/700.bin
+psfree/kpatch/750.bin
 psfree/kpatch/800.bin
 psfree/kpatch/850.bin
 psfree/kpatch/900.bin
 psfree/kpatch/903.bin
 psfree/kpatch/950.bin
-psfree/kpatch/Makefile
+psfree/lapse/ps4/700.mjs
+psfree/lapse/ps4/750.mjs
+psfree/lapse/ps4/751.mjs
 psfree/lapse/ps4/800.mjs
 psfree/lapse/ps4/850.mjs
 psfree/lapse/ps4/852.mjs
@@ -83,6 +87,8 @@ psfree/module/offset.mjs
 psfree/module/rw.mjs
 psfree/module/utils.mjs
 psfree/module/view.mjs
+psfree/rop/ps4/700.mjs
+psfree/rop/ps4/750.mjs
 psfree/rop/ps4/800.mjs
 psfree/rop/ps4/850.mjs
 psfree/rop/ps4/900.mjs
