@@ -360,7 +360,7 @@ async function jailbreak() {
 
     if (localStorage.getItem('HEN')) {
       if (JailbreakModule && typeof JailbreakModule.HEN === 'function') {
-          JailbreakModule.HEN(ps4fw);
+          JailbreakModule.HEN();
       } else {
           console.error("HEN function not found in Jailbreak.js module");
       }
