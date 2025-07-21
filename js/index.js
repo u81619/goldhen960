@@ -101,24 +101,38 @@ function closesettings() {
 
 function CheckFW() {
   const userAgent = navigator.userAgent;
-  const ps4Regex = /PlayStation 4/;
+  const ps4Regex = /PlayStation(?:;\s*PlayStation)?(?: 4\/| 4 )?(\d+\.\d+)/;
   const elementsToHide = [
-    'jailbreak-page', 'jailbreak', 'autojbchkb', 'agtext', 
+    'jailbreak-page', 'jailbreak', 'autojbchkb', 'agtext',
     'payloadsbtn', 'generate-cache-btn', 'update-exploit', 'settings-btn'
   ];
-
+  
   if (ps4Regex.test(userAgent)) {
-    const fwVersion = navigator.userAgent.substring(navigator.userAgent.indexOf('5.0 (') + 19, navigator.userAgent.indexOf(') Apple')).replace("layStation 4/",""); // Universal, credits to Kameleon
+    // Extract firmware version using regex
+    const match = userAgent.match(ps4Regex);
+    const fwVersion = match ? match[1] : "Unknown"; // Get the firmware version or default to "Unknown"
 
-    if (fwVersion === '9.00' || fwVersion === '9.03' || fwVersion === '9.60') {
+    if (
+      fwVersion === '9.00' || fwVersion === '9.03' || fwVersion === '9.60'
+    ) {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Compatible`;
       document.getElementById('PS4FW').style.color = 'green';
-      ps4fw = fwVersion.replace('.','');
-    } else if (fwVersion === '7.00' || fwVersion === '7.01' || fwVersion === '7.02' || fwVersion === '7.50' || fwVersion === '7.51' || fwVersion === '7.55' || fwVersion === fwVersion === '8.00' || fwVersion === '8.01' || fwVersion === '8.03' || fwVersion === '8.50' || fwVersion === '8.52' || fwVersion === '9.04' || fwVersion === '9.50' || fwVersion === '9.51') {
+      ps4fw = fwVersion.replace('.', '');
+      if (ps4fw === '903' || ps4fw === '960') {
+        document.getElementById('gameb').style.display = 'none';
+      }
+    } else if (
+      fwVersion === '7.00' || fwVersion === '7.01' || fwVersion === '7.02' ||
+      fwVersion === '7.50' || fwVersion === '7.51' || fwVersion === '7.55' ||
+      fwVersion === '8.00' || fwVersion === '8.01' || fwVersion === '8.03' ||
+      fwVersion === '8.50' || fwVersion === '8.52' || fwVersion === '9.04' ||
+      fwVersion === '9.50' || fwVersion === '9.51'
+    ) {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion} | Semi-Compatible`;
       document.getElementById('PS4FW').style.color = 'orange';
       choosejb('HEN');
-      ps4fw = fwVersion.replace('.','');
+      ps4fw = fwVersion.replace('.', '');
+      document.getElementById('linuxb').style.display = 'none';
     } else {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion || 'Unknown'} | Incompatible`;
       document.getElementById('PS4FW').style.color = 'red';
@@ -129,7 +143,7 @@ function CheckFW() {
       });
     }
 
-    document.title = "PSFree | " + fwVersion
+    document.title = "PSFree | " + fwVersion;
   } else {
     let platform = 'Unknown platform';
 
@@ -308,11 +322,15 @@ function loadajbsettings(){
   }
 
   if (ckbaj.checked) {
+    const console = document.getElementById("console");
     if (sessionStorage.getItem('jbsuccess')) {
-      console.log('Aleardy jailbroken !');
+      console.append(`Aleardy jailbroken !\n`);
+      console.scrollTop = console.scrollHeight;
     } else {
       document.getElementById('jailbreak').style.display = 'none';
       document.getElementById('loader').style.display = 'flex';
+      console.append(`Auto jailbreaking... Please wait for a few seconds.\n`);
+      console.scrollTop = console.scrollHeight;
       setTimeout(() => {
         jailbreak();
       }, 3000);
@@ -429,10 +447,10 @@ async function Loadpayloads(payload) {
 }
 
 function loadsettings() {
+  CheckFW();
   loadajbsettings();
   loadjbflavor();
   checksettings();
-  CheckFW();
 }
 
 function onCheckboxChange(checked) {
