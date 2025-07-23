@@ -6,6 +6,8 @@ const savedc = localStorage.getItem('dbugc');
 const menuBtns = document.querySelectorAll('.menu-btn');
 const psBtns = document.querySelectorAll('.ps-btn');
 const plsbtn = document.querySelectorAll('.button-container button');
+const consoleDev = document.getElementById("console");
+
 
 var ps4fw
 
@@ -323,15 +325,13 @@ function loadajbsettings(){
   }
 
   if (ckbaj.checked) {
-    const console = document.getElementById("console");
     if (sessionStorage.getItem('jbsuccess')) {
-      console.append(`Aleardy jailbroken !\n`);
-      console.scrollTop = console.scrollHeight;
+      consoleDev.append(`Already jailbroken !\n`);
+      consoleDev.scrollTop = consoleDev.scrollHeight;
     } else {
       document.getElementById('jailbreak').style.display = 'none';
-      document.getElementById('loader').style.display = 'flex';
-      console.append(`Auto jailbreaking... Please wait for a few seconds.\n`);
-      console.scrollTop = console.scrollHeight;
+      consoleDev.append(`Auto jailbreaking... Please wait for a few seconds.\n`);
+      consoleDev.scrollTop = consoleDev.scrollHeight;
       setTimeout(() => {
         jailbreak();
       }, 3000);
@@ -367,32 +367,36 @@ function loadajbsettings(){
 
 async function jailbreak() {
   try {
-    document.getElementById('jailbreak').style.display = 'none';
-    document.getElementById('loader').style.display = 'flex';
-    const modules = await loadMultipleModules([
-      '../payloads/Jailbreak.js',
-      '../psfree/alert.mjs'
-    ]);
-    console.log("All modules are loaded!");
-    const JailbreakModule = modules[0];
-
-    if (localStorage.getItem('HEN')) {
-      if (JailbreakModule && typeof JailbreakModule.HEN === 'function') {
-          JailbreakModule.HEN();
-      } else {
-          console.error("HEN function not found in Jailbreak.js module");
-      }
-    } else if (localStorage.getItem('GoldHEN')) {
-      if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
-          JailbreakModule.GoldHEN();
-      } else {
-          console.error("GoldHEN function not found in Jailbreak.js module");
-      }
+    if (sessionStorage.getItem('jbsuccess')) {
+      consoleDev.append(`Aleardy jailbroken !\n`);
+      consoleDev.scrollTop = consoleDev.scrollHeight;
     } else {
-      if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
-          JailbreakModule.GoldHEN();
+      document.getElementById('jailbreak').style.display = 'none';
+      const modules = await loadMultipleModules([
+        '../payloads/Jailbreak.js',
+        '../psfree/alert.mjs'
+      ]);
+      console.log("All modules are loaded!");
+      const JailbreakModule = modules[0];
+
+      if (localStorage.getItem('HEN')) {
+        if (JailbreakModule && typeof JailbreakModule.HEN === 'function') {
+            JailbreakModule.HEN();
+        } else {
+            console.error("HEN function not found in Jailbreak.js module");
+        }
+      } else if (localStorage.getItem('GoldHEN')) {
+        if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
+            JailbreakModule.GoldHEN();
+        } else {
+            console.error("GoldHEN function not found in Jailbreak.js module");
+        }
       } else {
-          console.error("GoldHEN function not found in Jailbreak.js module");
+        if (JailbreakModule && typeof JailbreakModule.GoldHEN === 'function') {
+            JailbreakModule.GoldHEN();
+        } else {
+            console.error("GoldHEN function not found in Jailbreak.js module");
+        }
       }
     }
   } catch (e) {

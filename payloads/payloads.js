@@ -75,7 +75,6 @@ function Loadpayloadlocal(PLfile){ //Loading Payload via Payload Param.
 
 function Loadpayloadonline(PLfile) {
     window.payload_path = PLfile;
-    // timeout is moved to lapse.mjs to execute after exploit success
 }
 
 // Payloads
