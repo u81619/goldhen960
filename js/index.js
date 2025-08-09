@@ -129,6 +129,9 @@ function CheckFW() {
       if (ps4fw === '903' || ps4fw === '960') {
         document.getElementById('gameb').style.display = 'none';
       }
+      if (ps4fw === '900' || ps4fw === '903' || ps4fw === '960'){
+        document.getElementById('linuxb').style.display = 'flex';
+      }
     } else {
       document.getElementById('PS4FW').textContent = `PS4 FW: ${fwVersion || 'Unknown'} | Incompatible`;
       document.getElementById('PS4FW').style.color = 'red';
